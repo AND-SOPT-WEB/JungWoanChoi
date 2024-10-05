@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+    margin: 1em;
+}
+
+.subtitle {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.food-balance {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.food1, .food2 {
+    text-align: center;
+    font-size:x-large;
+}
+
+ul.food-list {
+    list-style: none;
+}
+
