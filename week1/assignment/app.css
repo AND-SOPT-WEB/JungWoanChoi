@@ -1,0 +1,199 @@
+body {
+    margin: 0;
+    background-color: #000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.banner-pic {
+    position: relative;
+}
+
+.banner-pic-group {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.newjeans-nav {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    padding-left: 1em;
+    width: 100%;
+}    
+
+.newjeans-nav-list {
+    color: #fff;
+    font-family: "Edu AU VIC WA NT Dots", cursive;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.newjeans-nav-list a {
+    display: inline-block;
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.2em 0.05em;
+    border-bottom: 1px solid #fff;
+}
+
+.newjeans-nav-list a:hover {
+    border-top: 3px dotted #000;
+    border-bottom: 0;
+}
+
+.logo {
+    font-family: "Sixtyfour Convergence", sans-serif;
+    padding-right: 0.5em;
+}
+
+.newjeans-nav-list {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;     
+    margin: 0;      
+}
+
+.newjeans-nav-list li {
+    padding: 1em;
+}
+
+.newjeans-nav-icon {
+    display: flex;
+    gap: 1em;
+    margin-right: 1em;
+}
+
+.newjeans-nav-icon li {
+    list-style: none;
+}
+
+.newjeans-nav-icon .icon {
+    background-color: transparent;
+    width: 2em;
+}
+
+.newjeans-nav-icon a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.under-banner {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}
+
+header .phrase {
+    color: #fff;
+}
+
+.phrase {
+    background-color: #000;
+    padding: 1em;
+    border-radius: 999%;
+    margin: 0;
+}
+
+.banner-button {
+    color: #000;
+    background-color: #fff;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border-radius: 100%;
+    text-decoration: none;
+}
+
+.banner-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.collection-title {
+    color: #fff;
+    font-family: "Playwrite DE Grund", cursive;
+    padding: 0 0.5em;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.star {
+    font-size: 1.25em;
+}
+
+.rolling-area {
+    margin: 0;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.rolling-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 1.2em;
+    animation: rolling 15s linear infinite;
+}
+
+.list1 + .list2 {
+    margin: 0 1.2em;
+}
+
+
+.rolling-item img {
+    width: 12em;
+    height: 12em;
+    object-fit: cover;
+}
+
+@keyframes rolling {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes rolling2 {
+    0% {
+        transform: translate(100%);
+    }
+    100% {
+        transform: translate(0%);
+    }
+}
+
+.rolling-area2 {
+    display: flex;
+    overflow: scroll;
+}
+
+.rolling-area2-list img {
+    width: 15em;
+    height: 10em;
+    object-fit: cover;
+}
+
+.rolling-area2-list {
+    display: flex;
+    gap: 1em;
+    margin: 0;
+    padding: 0;
+}

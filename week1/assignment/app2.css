@@ -1,0 +1,37 @@
+body {
+    font-family: "Sixtyfour Convergence", sans-serif;
+    margin: 0;
+    background-color: #000;
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+}
+
+.phoning-link {
+    padding: 1em;
+}
+
+.phoning-div {
+}
+
+a{
+    text-decoration-color: #fff;
+}
+
+.newjeans-nav-list li {
+    margin: 0.5em 0;
+}
