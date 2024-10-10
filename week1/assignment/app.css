@@ -143,22 +143,26 @@ header .phrase {
     width: 100%;
 }
 
+.rolling-item {
+    margin: 0.7em;
+}
+
 .rolling-list {
     display: flex;
     margin: 0;
     padding: 0;
-    gap: 1.2em;
     animation: rolling 15s linear infinite;
 }
-
-.list1 + .list2 {
-    margin: 0 1.2em;
-}
-
 
 .rolling-item img {
     width: 12em;
     height: 12em;
+    object-fit: cover;
+}
+
+.rolling-item img:hover {
+    width: 13em;
+    height: 13em;
     object-fit: cover;
 }
 
@@ -173,10 +177,10 @@ header .phrase {
 
 @keyframes rolling2 {
     0% {
-        transform: translate(100%);
+        transform: translateX(100%);
     }
     100% {
-        transform: translate(0%);
+        transform: translateX(0%);
     }
 }
 
