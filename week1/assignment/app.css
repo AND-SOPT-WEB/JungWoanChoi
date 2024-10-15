@@ -175,15 +175,6 @@ header .phrase {
     }
 }
 
-@keyframes rolling2 {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
-}
-
 .rolling-area2 {
     display: flex;
     overflow: scroll;
