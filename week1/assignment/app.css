@@ -1,10 +1,5 @@
 body {
-    margin: 0;
     background-color: #000;
-}
-
-* {
-    box-sizing: border-box;
 }
 
 .banner-pic {
@@ -20,20 +15,12 @@ body {
 
 .newjeans-nav {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     position: fixed;
     top: 0;
-    padding-left: 1rem;
     width: 100%;
 }    
-
-.newjeans-nav-list {
-    color: #fff;
-    font-family: "Edu AU VIC WA NT Dots", cursive;
-    font-optical-sizing: auto;
-    font-style: normal;
-}
 
 .newjeans-nav-list a {
     display: inline-block;
@@ -57,6 +44,7 @@ body {
 }
 
 .newjeans-nav-list {
+    font-family: "Edu AU VIC WA NT Dots", cursive;
     width: 40%;
     display: flex;
     justify-content: space-between;
@@ -81,7 +69,6 @@ body {
 }
 
 .newjeans-nav-icon .icon {
-    background-color: transparent;
     width: 2rem;
 }
 
@@ -139,14 +126,10 @@ header .phrase {
 }
 
 .rolling-area {
-    margin: 0;
+    margin: 1em;
     display: flex;
     overflow: hidden;
     width: 100%;
-}
-
-.rolling-item {
-    margin: 0.7rem;
 }
 
 .rolling-list {
@@ -157,9 +140,15 @@ header .phrase {
 }
 
 .rolling-item img {
+    display: block;
+    margin: 0 1em;
     width: 12rem;
     height: 12rem;
     object-fit: cover;
+
+    &:hover {
+        animation: hover-rolling;
+    }
 }
 
 .rolling-item img:hover {
