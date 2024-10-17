@@ -88,7 +88,7 @@ body {
     right: 1rem;
 }
 
-header .phrase {
+.under-banner .phrase {
     color: #fff;
 }
 
@@ -113,16 +113,39 @@ header .phrase {
     color: #fff;
 }
 
+/* 무한배너 구현 */
+
 .collection-title {
     color: #fff;
     font-family: "Playwrite DE Grund", cursive;
     padding: 0 0.5rem;
     font-size: 1rem;
     font-weight: 600;
+    margin: 1rem;
 }
 
 .star {
     font-size: 1.25rem;
+}
+
+.scroll-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button-container {
+    margin: 0.5rem;
+    display: block;
+}
+
+.scroll-button {
+    padding: 0.5rem;
+    text-decoration: none;
+    background-color: #fff;
+    color: #000;
+    border-radius: 100%;
+    border: 0.15rem solid rgb(0, 115, 255);
 }
 
 .rolling-area {
@@ -141,20 +164,15 @@ header .phrase {
 
 .rolling-item img {
     display: block;
-    margin: 0 1em;
+    margin: 0 1rem;
     width: 12rem;
     height: 12rem;
     object-fit: cover;
 
     &:hover {
-        animation: hover-rolling;
+        width: 13rem;
+        height: 13rem;
     }
-}
-
-.rolling-item img:hover {
-    width: 13rem;
-    height: 13rem;
-    object-fit: cover;
 }
 
 @keyframes rolling {
@@ -165,6 +183,10 @@ header .phrase {
         transform: translateX(-100%);
     }
 }
+
+/* 스크롤바 구현 */
+
+
 
 .rolling-area2 {
     display: flex;
@@ -182,4 +204,13 @@ header .phrase {
     gap: 1rem;
     margin: 0;
     padding: 0;
+}
+
+.button-content1 {
+    position: fixed;
+}
+
+.button-last_content {
+    position: fixed;
+    right: 0;
 }
