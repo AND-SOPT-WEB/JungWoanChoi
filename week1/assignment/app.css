@@ -2,15 +2,10 @@ body {
     background-color: #000;
 }
 
-.banner-pic {
+.header {
     position: relative;
-}
-
-.banner-pic-group {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    opacity: 0.7;
+    top: 1rem;
+    z-index: 1;
 }
 
 .newjeans-nav {
@@ -77,6 +72,17 @@ body {
     text-decoration: none;
 }
 
+.banner-pic-group {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.banner-pic {
+    position: relative;
+}
+
 .under-banner {
     display: flex;
     width: 100%;
@@ -84,8 +90,8 @@ body {
     justify-content: flex-end;
     align-items: flex-end;
     position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+    right: 2rem;
+    bottom: 1.5rem;
 }
 
 .under-banner .phrase {
@@ -128,26 +134,6 @@ body {
     font-size: 1.25rem;
 }
 
-.scroll-area {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.button-container {
-    margin: 0.5rem;
-    display: block;
-}
-
-.scroll-button {
-    padding: 0.5rem;
-    text-decoration: none;
-    background-color: #fff;
-    color: #000;
-    border-radius: 100%;
-    border: 0.15rem solid rgb(0, 115, 255);
-}
-
 .rolling-area {
     margin: 1em;
     display: flex;
@@ -186,8 +172,6 @@ body {
 
 /* 스크롤바 구현 */
 
-
-
 .rolling-area2 {
     display: flex;
     overflow: scroll;
@@ -206,11 +190,22 @@ body {
     padding: 0;
 }
 
-.button-content1 {
-    position: fixed;
+.scroll-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.button-last_content {
-    position: fixed;
-    right: 0;
+.button-container {
+    margin: 0.3rem;
+    display: block;
+}
+
+.scroll-button {
+    padding: 0.5rem;
+    text-decoration: none;
+    background-color: #fff;
+    color: #000;
+    border-radius: 100%;
+    border: 0.15rem solid rgb(0, 115, 255);
 }
