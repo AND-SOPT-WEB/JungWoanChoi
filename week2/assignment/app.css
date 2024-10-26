@@ -1,0 +1,11 @@
+/* header css 시작 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* header css 끝 */
+
+.grid-container {
+    background-color: #CEDF9F;
+}
