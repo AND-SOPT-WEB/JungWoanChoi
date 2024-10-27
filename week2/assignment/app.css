@@ -6,6 +6,59 @@
 }
 /* header css 끝 */
 
-.grid-container {
+.filter, .data {
+    margin: 1rem;
+}
+
+#memberList {
+    padding: 0;
+}
+
+.member-item {
+    list-style: none;
     background-color: #CEDF9F;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.member-item span {
+    text-align: center;
+}
+
+.member-item .name {
+    color: #333;
+    font-weight: bold;
+    width: 15%;
+}
+
+.member-item .englishName {
+    color: #555;
+    width: 15%;
+}
+
+.member-item .github {
+    color: #007bff;
+    width: 20%;
+}
+
+.member-item .gender {
+    color: #6c757d;
+    width: 10%;
+}
+
+.member-item .role {
+    color: #28a745;
+    width: 10%;
+}
+
+.member-item .firstWeekGroup,
+.member-item .secondWeekGroup {
+    color: #ff7f50;
+    width: 10%;
+    text-align: center;
+}
+
+.represent-list {
+    border-bottom: 0.5rem solid black;
 }
