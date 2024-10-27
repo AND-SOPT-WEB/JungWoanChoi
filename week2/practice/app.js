@@ -1,6 +1,6 @@
-const button = document.querySelector("#button");
-const inputData = document.querySelector("#input");
-const ul = document.querySelector("ul");
+const button = document.querySelector('#button');
+const ul = document.querySelector('ul');
+const inputData = document.querySelector('#input');
 
 button.addEventListener("click", function() {
     if (inputData.value.length > 0) {
@@ -8,11 +8,17 @@ button.addEventListener("click", function() {
         li.textContent = inputData.value;
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "삭제";
+
+        deleteBtn.addEventListener("click", function() {
+            li.remove();
+        });
+
         li.appendChild(deleteBtn);
         ul.appendChild(li);
         inputData.value = "";
     }
-})
+}
+)
 
 // 삭제 버튼 누르면 값 삭제하기
 // 배열로 접근해서 추가하고 삭제한다는 느낌
