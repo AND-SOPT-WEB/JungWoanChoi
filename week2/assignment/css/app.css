@@ -1,0 +1,82 @@
+/* header css 시작 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #ddd;
+}
+/* header css 끝 */
+
+.filter, .data {
+    margin: 1rem;
+}
+
+/* 테이블 스타일 */
+#memberTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+#memberTable thead th {
+    background-color: #CEDF9F;
+    color: #333;
+    font-weight: bold;
+    padding: 0.75rem;
+    border-bottom: 0.5rem solid black;
+    text-align: center;
+}
+
+#memberTable tbody tr {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+
+#memberTable tbody tr:hover {
+    background-color: #e6e6e6;
+}
+
+#memberTable tbody td {
+    padding: 0.75rem;
+    text-align: center;
+    color: #333;
+}
+
+/* 특정 컬럼 스타일 */
+.name, .englishName {
+    font-weight: bold;
+    width: 15%;
+}
+
+.github {
+    color: #007bff;
+    width: 20%;
+}
+
+.gender, .role, .firstWeekGroup, .secondWeekGroup {
+    color: #6c757d;
+    width: 10%;
+}
+
+/* 체크박스 */
+#memberTable input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+/* 버튼 스타일 */
+.filter-button, .reset-button, .delete-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.filter-button:hover, .reset-button:hover, .delete-button:hover {
+    background-color: #0056b3;
+}

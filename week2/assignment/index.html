@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 관리 페이지</title>
-    <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" href="grid.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/1f1bdf31e2.js" crossorigin="anonymous"></script>
 </head>
@@ -45,20 +46,24 @@
         <section>
             <div class="data">
                 <form action="">
-                    <button class="delete-button delete" onclick="deleteAll();">선택삭제</button>
-                    <button>추가</button>
-                    <ul id="memberList">
-                        <li class="represent-list">
-                            <input id="select-all" type="checkbox" class="represent">
-                            <span class="represent name">이름</span>
-                            <span class="represent englishName">영문이름</span>
-                            <span class="represent github">Github</span>
-                            <span class="represent gender">성별</span>
-                            <span class="represent role">역할</span>
-                            <span class="represent firstWeekGroup">1주차 금잔디</span>
-                            <span class="represent secondWeekGroup">2주차 금잔디</span>
-                        </li>
-                    </ul>
+                    <button type="button" class="delete-button delete" onclick="deleteAll();">선택삭제</button>
+                    <button type="button">추가</button>
+                    <table id="memberTable">
+                        <thead>
+                            <tr>
+                                <th><input id="select-all" type="checkbox" class="represent"></th>
+                                <th class="represent name">이름</th>
+                                <th class="represent englishName">영문이름</th>
+                                <th class="represent github">Github</th>
+                                <th class="represent gender">성별</th>
+                                <th class="represent role">역할</th>
+                                <th class="represent firstWeekGroup">1주차 금잔디</th>
+                                <th class="represent secondWeekGroup">2주차 금잔디</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </form>
             </div>
         </section>
