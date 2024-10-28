@@ -1,67 +1,132 @@
+// 초기 데이터 로드
 const membersData = JSON.parse(localStorage.getItem("membersData")) || [];
+let filteredMembers = JSON.parse(localStorage.getItem("filteredMembers")) || membersData;
 const memberList = document.querySelector("#memberList");
 
-function renderMemberList() {
-    if (Array.isArray(membersData)) {
-        membersData.forEach(member => {
-            const listItem = document.createElement("li");
-            listItem.classList.add("member-item");
-            
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.className = "member-checkbox";
+const filterButton = document.querySelector(".filter-button");
+const resetButton = document.querySelector(".reset-button");
 
-            const nameSpan = document.createElement("span");
-            nameSpan.className = "name";
-            nameSpan.textContent = member.name;
+// section1에서 input값 입력하고 검색하면 filter하는 기능
+filterButton.addEventListener("click", () => {
+    const nameValue = document.getElementById("name").value;
+    const englishNameValue = document.getElementById("englishName").value;
+    const githubValue = document.getElementById("github").value;
+    const genderValue = document.getElementById("gender").value;
+    const roleValue = document.getElementById("role").value;
+    const firstWeekGroupValue = document.getElementById("firstWeekGroup").value;
+    const secondWeekGroupValue = document.getElementById("secondWeekGroup").value;
 
-            const englishNameSpan = document.createElement("span");
-            englishNameSpan.className = "englishName";
-            englishNameSpan.textContent = member.englishName;
+    // 필터링 조건에 따라 멤버 필터링
+    filteredMembers = membersData.filter(member => {
+        return (
+            (nameValue === "" || member.name.includes(nameValue)) &&
+            (englishNameValue === "" || member.englishName.includes(englishNameValue)) &&
+            (githubValue === "" || member.github.includes(githubValue)) &&
+            (genderValue === "" || member.gender.includes(genderValue)) &&
+            (roleValue === "" || member.role.includes(roleValue)) &&
+            (firstWeekGroupValue === "" || member.firstWeekGroup.includes(firstWeekGroupValue)) &&
+            (secondWeekGroupValue === "" || member.secondWeekGroup.includes(secondWeekGroupValue))
+        );
+    });
 
-            const githubSpan = document.createElement("span");
-            githubSpan.className = "github";
-            githubSpan.textContent = member.github;
+    localStorage.setItem("filteredMembers", JSON.stringify(filteredMembers));
+    renderMemberList(filteredMembers);
+});
 
-            const genderSpan = document.createElement("span");
-            genderSpan.className = "gender";
-            genderSpan.textContent = member.gender;
+function renderMemberList(data) {
 
-            const roleSpan = document.createElement("span");
-            roleSpan.className = "role";
-            roleSpan.textContent = member.role;
+    const memberList = document.querySelector("#memberList");
+    const fixedListItem = memberList.querySelector(".represent-list");
 
-            const firstWeekGroupSpan = document.createElement("span");
-            firstWeekGroupSpan.className = "firstWeekGroup";
-            firstWeekGroupSpan.textContent = member.firstWeekGroup;
+    memberList.innerHTML = "";
+    memberList.appendChild(fixedListItem);
 
-            const secondWeekGroupSpan = document.createElement("span");
-            secondWeekGroupSpan.className = "secondWeekGroup";
-            secondWeekGroupSpan.textContent = member.secondWeekGroup;
+    data.forEach(member => {
+        const listItem = document.createElement("li");
+        listItem.classList.add("member-item");
 
-            listItem.append(
-                checkbox,
-                nameSpan, 
-                englishNameSpan,
-                githubSpan,
-                genderSpan,
-                roleSpan,
-                firstWeekGroupSpan,
-                secondWeekGroupSpan);
-            
-            memberList.appendChild(listItem);
-        });
-    } else {
-        console.error("membersData is not an array:", membersData);
-    }
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "member-checkbox";
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "name";
+        nameSpan.textContent = member.name;
+
+        const englishNameSpan = document.createElement("span");
+        englishNameSpan.className = "englishName";
+        englishNameSpan.textContent = member.englishName;
+
+        const githubSpan = document.createElement("span");
+        githubSpan.className = "github";
+        githubSpan.textContent = member.github;
+
+        const genderSpan = document.createElement("span");
+        genderSpan.className = "gender";
+        genderSpan.textContent = member.gender;
+
+        const roleSpan = document.createElement("span");
+        roleSpan.className = "role";
+        roleSpan.textContent = member.role;
+
+        const firstWeekGroupSpan = document.createElement("span");
+        firstWeekGroupSpan.className = "firstWeekGroup";
+        firstWeekGroupSpan.textContent = member.firstWeekGroup;
+
+        const secondWeekGroupSpan = document.createElement("span");
+        secondWeekGroupSpan.className = "secondWeekGroup";
+        secondWeekGroupSpan.textContent = member.secondWeekGroup;
+
+        listItem.append(
+            checkbox,
+            nameSpan, 
+            englishNameSpan,
+            githubSpan,
+            genderSpan,
+            roleSpan,
+            firstWeekGroupSpan,
+            secondWeekGroupSpan
+        );
+
+        memberList.appendChild(listItem);
+    });
 }
 
-renderMemberList();
+// 페이지 로드 시 필터링된 데이터 또는 전체 데이터 렌더링
+document.addEventListener("DOMContentLoaded", () => {
+    renderMemberList(filteredMembers);
+});
 
-function sayInfo() {
-    console.log("검색 버튼 클릭됨");
-    const nameBox = document.getElementById('name').value;
-    const englishNameBox = document.getElementById('englishName').value;
+// 리셋 버튼 - 필터링 초기화하고 전체 멤버 리스트 로드
+resetButton.addEventListener("click", () => {
+    filteredMembers = membersData; // 원본 데이터를 사용
+    localStorage.setItem("filteredMembers", JSON.stringify(membersData)); // 필터링 초기화
+    renderMemberList(membersData);
+});
 
-    alert(nameBox + '님 안녕하세요!');
-}
+// 체크박스 전체 선택 및 해제
+const selectAll = document.querySelector('#select-all');
+
+selectAll.onclick = () => {
+    const listAll = document.querySelectorAll(".member-checkbox");
+    listAll.forEach(checkbox => checkbox.checked = selectAll.checked);
+};
+
+// 체크박스 누르고 삭제 버튼 클릭 시 해당 항목 삭제
+const deleteButton = document.querySelector(".delete-button");
+
+deleteButton.onclick = () => {
+    const selectedMembers = [...document.querySelectorAll(".member-checkbox:checked")];
+    selectedMembers.forEach(checkbox => {
+        const nameToRemove = checkbox.nextSibling.textContent;
+        const indexToRemove = membersData.findIndex(member => member.name === nameToRemove);
+        
+        if (indexToRemove !== -1) {
+            membersData.splice(indexToRemove, 1);
+        }
+        checkbox.parentElement.remove();
+    });
+
+    localStorage.setItem("membersData", JSON.stringify(membersData));
+    localStorage.setItem("filteredMembers", JSON.stringify(filteredMembers));
+};

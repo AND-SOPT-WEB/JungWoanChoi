@@ -35,8 +35,8 @@
                         <input type="text" id="firstWeekGroup"></label>
                     <label><span>2주차 금잔디조</span>
                         <input type="text" id="secondWeekGroup"></label>
-                    <button>초기화</button>
-                    <button type="button" onclick="sayInfo()">검색</button>
+                    <button class="reset-button">초기화</button>
+                    <button class="filter-button">검색</button>
                 </form>
             </div>
         </section>
@@ -45,14 +45,14 @@
         <section>
             <div class="data">
                 <form action="">
-                    <button>선택삭제</button>
+                    <button class="delete-button delete" onclick="deleteAll();">선택삭제</button>
                     <button>추가</button>
                     <ul id="memberList">
-                        <li class="represent-list member-item">
-                            <input type="checkbox" class="represent">
+                        <li class="represent-list">
+                            <input id="select-all" type="checkbox" class="represent">
                             <span class="represent name">이름</span>
                             <span class="represent englishName">영문이름</span>
-                            <span class="representgithub">Github</span>
+                            <span class="represent github">Github</span>
                             <span class="represent gender">성별</span>
                             <span class="represent role">역할</span>
                             <span class="represent firstWeekGroup">1주차 금잔디</span>

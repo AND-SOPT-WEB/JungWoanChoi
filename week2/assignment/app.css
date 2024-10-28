@@ -14,7 +14,7 @@
     padding: 0;
 }
 
-.member-item {
+.member-item, .represent-list {
     list-style: none;
     background-color: #CEDF9F;
     display: flex;
@@ -22,41 +22,24 @@
     justify-content: space-between;
 }
 
-.member-item span {
+.member-item span, .represent-list span {
     text-align: center;
 }
 
-.member-item .name {
+.name, .englishName {
     color: #333;
     font-weight: bold;
     width: 15%;
 }
 
-.member-item .englishName {
-    color: #555;
-    width: 15%;
-}
-
-.member-item .github {
+.github {
     color: #007bff;
     width: 20%;
 }
 
-.member-item .gender {
+.gender, .role, .firstWeekGroup, .secondWeekGroup {
     color: #6c757d;
     width: 10%;
-}
-
-.member-item .role {
-    color: #28a745;
-    width: 10%;
-}
-
-.member-item .firstWeekGroup,
-.member-item .secondWeekGroup {
-    color: #ff7f50;
-    width: 10%;
-    text-align: center;
 }
 
 .represent-list {
