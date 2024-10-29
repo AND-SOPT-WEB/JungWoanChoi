@@ -15,7 +15,7 @@
     <header class="header">
             <div><i class="fa-solid fa-bars fa-xl"></i></i></div>
             <h1>회원 관리 페이지</h1>
-            <p>어쩌구저쩌구</p>
+            <p>AND SOPT 웹 파트</p>
     </header>
     </nav>
     
@@ -32,6 +32,7 @@
                         <input type="text" id="github"></label>
                     <label><span>성별</span>
                         <select id="gender">
+                            <option value="all-gender">모두</option>
                             <option value="male">남성</option>
                             <option value="female">여성</option>
                         </select></label>
@@ -41,8 +42,8 @@
                         <input type="text" id="firstWeekGroup"></label>
                     <label><span>2주차 금잔디조</span>
                         <input type="text" id="secondWeekGroup"></label>
-                    <button class="reset-button">초기화</button>
-                    <button class="filter-button">검색</button>
+                    <button type="button" class="reset-button">초기화</button>
+                    <button type="button" class="filter-button">검색</button>
                 </form>
             </div>
         </section>
@@ -50,7 +51,7 @@
         <!-- 두 번째 section -->
         <section>
             <div class="data">
-                <form action="">
+                <form action="" class="data-form">
                     <div class="button-container">
                         <button type="button" class="delete-button delete" onclick="deleteAll();">선택삭제</button>
                         <button type="button" class="add-button">추가</button>
@@ -76,30 +77,36 @@
         </section>
         <div id="modal" class="modal">
             <div class="modal-content">
-                <h2>새 멤버 추가</h2>
-                <label>이름
+                <div class="modal-header">
+                    <h2>새 멤버 추가</h2>
+                    <button id="closeModalButton" class="close-button">닫기</button>
+                </div>
+                
+                <label ><span class="modal-name">이름</span>
                     <input type="text" id="newName" required>
                 </label>
-                <label>영문 이름
+                <label><span class="modal-name">영문 이름</span>
                     <input type="text" id="newEnglishName" required>
                 </label>
-                <label>Github ID
+                <label><span class="modal-name">Github ID</span>
                     <input type="text" id="newGithub" required>
                 </label>
-                <label>성별
-                    <input type="text" id="newGender" required>
+                <label><span class="modal-name">성별</span>
+                    <select id="newGender" required>
+                        <option value="male">남성</option>
+                        <option value="female">여성</option>
+                    </select>
                 </label>
-                <label>역할
+                <label><span class="modal-name">역할</span>
                     <input type="text" id="newRole" required>
                 </label>
-                <label>1주차 금잔디조
+                <label><span class="modal-name">1주차 금잔디조</span>
                     <input type="number" id="newFirstWeekGroup" required>
                 </label>
-                <label>2주차 금잔디조
+                <label><span class="modal-name">2주차 금잔디조</span>
                     <input type="number" id="newSecondWeekGroup" required>
                 </label>
                 <button id="addMemberButton">추가</button>
-                <button id="closeModalButton">닫기</button>
             </div>
         </div>
     </main>

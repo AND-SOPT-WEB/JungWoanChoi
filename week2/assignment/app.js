@@ -1,5 +1,5 @@
 // 초기 데이터 로드
-const membersData = JSON.parse(localStorage.getItem("membersData"));
+const membersData = JSON.parse(localStorage.getItem("membersData")) || [];
 let filteredMembers = JSON.parse(localStorage.getItem("filteredMembers")) || membersData;
 
 const filterButton = document.querySelector(".filter-button");
@@ -20,10 +20,10 @@ filterButton.addEventListener("click", () => {
             (nameValue === "" || member.name.includes(nameValue)) &&
             (englishNameValue === "" || member.englishName.includes(englishNameValue)) &&
             (githubValue === "" || member.github.includes(githubValue)) &&
-            (genderValue === "" || member.gender === genderValue) &&
+            (genderValue === "all-gender" || member.gender === genderValue) &&
             (roleValue === "" || member.role.includes(roleValue)) &&
-            (firstWeekGroupValue === "" || member.firstWeekGroup.includes(firstWeekGroupValue)) &&
-            (secondWeekGroupValue === "" || member.secondWeekGroup.includes(secondWeekGroupValue))
+            (firstWeekGroupValue === "" || member.firstWeekGroup === (firstWeekGroupValue)) &&
+            (secondWeekGroupValue === "" || member.secondWeekGroup === (secondWeekGroupValue))
         );
     });
 
@@ -51,7 +51,11 @@ function renderMemberTable(data) {
         englishNameCell.textContent = member.englishName;
 
         const githubCell = document.createElement("td");
-        githubCell.textContent = member.github;
+        const githubLink = document.createElement("a");
+        githubLink.href = `https://github.com/${member.github}`;
+        githubLink.target = "_blank";
+        githubLink.textContent = member.github;
+        githubCell.appendChild(githubLink);
 
         const genderCell = document.createElement("td");
         genderCell.textContent = member.gender;
@@ -87,8 +91,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 리셋 버튼 - 필터링 초기화하고 전체 멤버 리스트 로드
 resetButton.addEventListener("click", () => {
-    filteredMembers = membersData; // 원본 데이터를 사용
-    localStorage.setItem("filteredMembers", JSON.stringify(membersData)); // 필터링 초기화
+    document.getElementById("name").value = "";
+    document.getElementById("englishName").value = "";
+    document.getElementById("github").value = "";
+    document.getElementById("gender").value = "all-gender";
+    document.getElementById("role").value = "";
+    document.getElementById("firstWeekGroup").value = "";
+    document.getElementById("secondWeekGroup").value = "";
+
+    filteredMembers = membersData;
+    localStorage.setItem("filteredMembers", JSON.stringify(membersData));
     renderMemberTable(membersData);
 });
 
@@ -143,6 +155,13 @@ closeModalButton.addEventListener("click", () => {
     modal.style.display = "none";
 });
 
+//백드롭 클릭하면 모달 닫힘
+document.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
 // 모달 입력 필드 초기화
 function clearModalInputs() {
     document.getElementById("newName").value = "";
@@ -184,22 +203,19 @@ addMemberButton.addEventListener("click", () => {
     // 테이블에 추가
     // membersData와 filteredMembers에 새 멤버 추가
     membersData.push(newMember);
-    filteredMembers = [...membersData]; // 전체 데이터 갱신
+    filteredMembers = [...membersData];
     localStorage.setItem("membersData", JSON.stringify(membersData));
-    localStorage.setItem("filteredMembers", JSON.stringify(filteredMembers)); // 저장된 필터 데이터도 업데이트
+    localStorage.setItem("filteredMembers", JSON.stringify(filteredMembers));
 
-    renderMemberTable(filteredMembers); // 테이블 다시 렌더링
+    renderMemberTable(filteredMembers);
 
-    modal.style.display = "none"; // 모달 숨김
-    clearModalInputs(); // 입력 필드 초기화
+    modal.style.display = "none";
+    clearModalInputs();
 });
 
 // 모달 입력 필드 초기화 함수
 
-
 // 페이지 로드 시 저장된 데이터를 테이블에 렌더링
 document.addEventListener("DOMContentLoaded", () => {
-    renderMemberTable(filteredMembers); // 로드 시 필터링된 데이터가 표시되도록
+    renderMemberTable(filteredMembers);
 });
-
-
