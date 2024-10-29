@@ -294,13 +294,3 @@ export const members = [
   if (!localStorage.getItem("membersData")) {
     localStorage.setItem("membersData", JSON.stringify(members));
   }
-
-// Json 문자열을 자스 객체로 변환
-// const jsonString = '{"name: "Alice", "age": 25}'
-// const user = JSON.parse(jsonString);
-// console.log(user.name);
-
-// 데이터를 문자열로 변환
-// const user = {name: "Alice", age: 25};
-// const jsonString = JSON.stringify(user);
-// console.log(jsonString);

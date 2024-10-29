@@ -1,11 +1,11 @@
 // 초기 데이터 로드
-const membersData = JSON.parse(localStorage.getItem("membersData")) || [];
+const membersData = JSON.parse(localStorage.getItem("membersData"));
 let filteredMembers = JSON.parse(localStorage.getItem("filteredMembers")) || membersData;
 
 const filterButton = document.querySelector(".filter-button");
 const resetButton = document.querySelector(".reset-button");
 
-// section1에서 input값 입력하고 검색하면 filter하는 기능
+// 첫 번째 section에서 input값 입력하고 검색하면 filter하는 기능
 filterButton.addEventListener("click", () => {
     const nameValue = document.getElementById("name").value;
     const englishNameValue = document.getElementById("englishName").value;
@@ -20,7 +20,7 @@ filterButton.addEventListener("click", () => {
             (nameValue === "" || member.name.includes(nameValue)) &&
             (englishNameValue === "" || member.englishName.includes(englishNameValue)) &&
             (githubValue === "" || member.github.includes(githubValue)) &&
-            (genderValue === "" || member.gender.includes(genderValue)) &&
+            (genderValue === "" || member.gender === genderValue) &&
             (roleValue === "" || member.role.includes(roleValue)) &&
             (firstWeekGroupValue === "" || member.firstWeekGroup.includes(firstWeekGroupValue)) &&
             (secondWeekGroupValue === "" || member.secondWeekGroup.includes(secondWeekGroupValue))
@@ -33,7 +33,7 @@ filterButton.addEventListener("click", () => {
 
 function renderMemberTable(data) {
     const tableBody = document.querySelector("#memberTable tbody");
-    tableBody.innerHTML = ""; // 테이블 초기화
+    tableBody.innerHTML = "";
 
     data.forEach(member => {
         const row = document.createElement("tr");
@@ -121,9 +121,85 @@ deleteButton.onclick = () => {
     localStorage.setItem("filteredMembers", JSON.stringify(filteredMembers));
 };
 
-// 개별 체크박스 상태 변경 시 `select-all` 체크박스 상태 업데이트
+// 개별 체크박스 상태 변경 시 체크박스 상태 업데이트
 document.addEventListener("click", () => {
     const allCheckboxes = [...document.querySelectorAll(".member-checkbox")];
     const isAllChecked = allCheckboxes.every(checkbox => checkbox.checked);
     document.querySelector("#select-all").checked = isAllChecked;
 });
+
+const modal = document.getElementById("modal");
+const addButton = document.querySelector(".add-button");
+const closeModalButton = document.getElementById("closeModalButton");
+const addMemberButton = document.getElementById("addMemberButton");
+
+// 모달 열기
+addButton.addEventListener("click", () => {
+    modal.style.display = "block";
+});
+
+// 모달 닫기
+closeModalButton.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+// 모달 입력 필드 초기화
+function clearModalInputs() {
+    document.getElementById("newName").value = "";
+    document.getElementById("newEnglishName").value = "";
+    document.getElementById("newGithub").value = "";
+    document.getElementById("newGender").value = "";
+    document.getElementById("newRole").value = "";
+    document.getElementById("newFirstWeekGroup").value = "";
+    document.getElementById("newSecondWeekGroup").value = "";
+}
+
+// 데이터에 모달에 입력한 정보의 새 멤버 추가
+addMemberButton.addEventListener("click", () => {
+    const newName = document.getElementById("newName").value;
+    const newEnglishName = document.getElementById("newEnglishName").value;
+    const newGithub = document.getElementById("newGithub").value;
+    const newGender = document.getElementById("newGender").value;
+    const newRole = document.getElementById("newRole").value;
+    const newFirstWeekGroup = parseInt(document.getElementById("newFirstWeekGroup").value);
+    const newSecondWeekGroup = parseInt(document.getElementById("newSecondWeekGroup").value);
+
+    if (!newName || !newEnglishName || !newGithub || !newGender || !newRole || isNaN(newFirstWeekGroup) || isNaN(newSecondWeekGroup)) {
+        alert("모든 필드를 입력해야 합니다.");
+        return;
+    }
+
+    // 새로운 멤버 객체 생성
+    const newMember = {
+        id: membersData.length + 1,
+        name: newName,
+        englishName: newEnglishName,
+        github: newGithub,
+        gender: newGender,
+        role: newRole,
+        firstWeekGroup: parseInt(newFirstWeekGroup),
+        secondWeekGroup: parseInt(newSecondWeekGroup),
+    };
+
+    // 테이블에 추가
+    // membersData와 filteredMembers에 새 멤버 추가
+    membersData.push(newMember);
+    filteredMembers = [...membersData]; // 전체 데이터 갱신
+    localStorage.setItem("membersData", JSON.stringify(membersData));
+    localStorage.setItem("filteredMembers", JSON.stringify(filteredMembers)); // 저장된 필터 데이터도 업데이트
+
+    renderMemberTable(filteredMembers); // 테이블 다시 렌더링
+
+    modal.style.display = "none"; // 모달 숨김
+    clearModalInputs(); // 입력 필드 초기화
+});
+
+// 모달 입력 필드 초기화 함수
+
+
+// 페이지 로드 시 저장된 데이터를 테이블에 렌더링
+document.addEventListener("DOMContentLoaded", () => {
+    renderMemberTable(filteredMembers); // 로드 시 필터링된 데이터가 표시되도록
+});
+
+
