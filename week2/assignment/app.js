@@ -1,6 +1,10 @@
+// 로컬스토리지에 데이터 저장하는 함수
+const setLocalStorage = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(data));
+}
 // 초기 데이터 로드
 const membersData = JSON.parse(localStorage.getItem("membersData")) || [];
-let filteredMembers = JSON.parse(localStorage.getItem("filteredMembers")) || membersData;
+let filteredMembers = [...membersData];
 
 const filterButton = document.querySelector(".filter-button");
 const resetButton = document.querySelector(".reset-button");
@@ -27,7 +31,6 @@ filterButton.addEventListener("click", () => {
         );
     });
 
-    localStorage.setItem("filteredMembers", JSON.stringify(filteredMembers));
     renderMemberTable(filteredMembers);
 });
 
@@ -99,8 +102,7 @@ resetButton.addEventListener("click", () => {
     document.getElementById("firstWeekGroup").value = "";
     document.getElementById("secondWeekGroup").value = "";
 
-    filteredMembers = membersData;
-    localStorage.setItem("filteredMembers", JSON.stringify(membersData));
+    filteredMembers = [...membersData];
     renderMemberTable(membersData);
 });
 
@@ -128,9 +130,7 @@ deleteButton.onclick = () => {
         row.remove();
     });
 
-    filteredMembers = membersData;
-    localStorage.setItem("membersData", JSON.stringify(membersData));
-    localStorage.setItem("filteredMembers", JSON.stringify(filteredMembers));
+    setLocalStorage("membersData", membersData);
 };
 
 // 개별 체크박스 상태 변경 시 체크박스 상태 업데이트
@@ -203,19 +203,9 @@ addMemberButton.addEventListener("click", () => {
     // 테이블에 추가
     // membersData와 filteredMembers에 새 멤버 추가
     membersData.push(newMember);
-    filteredMembers = [...membersData];
-    localStorage.setItem("membersData", JSON.stringify(membersData));
-    localStorage.setItem("filteredMembers", JSON.stringify(filteredMembers));
-
-    renderMemberTable(filteredMembers);
+    setLocalStorage("membersData", membersData);
+    renderMemberTable(membersData);
 
     modal.style.display = "none";
     clearModalInputs();
-});
-
-// 모달 입력 필드 초기화 함수
-
-// 페이지 로드 시 저장된 데이터를 테이블에 렌더링
-document.addEventListener("DOMContentLoaded", () => {
-    renderMemberTable(filteredMembers);
 });
