@@ -38,7 +38,7 @@ const Game = () => {
     };
 
     const handleBlockClick = (num) => {
-        if (!isGameStarted) {
+        if (!isGameStarted && num === 1) {
             setIsGameStarted(true);
             setIsTimerActive(true); // 게임 시작 시 타이머 활성화
         }
@@ -75,7 +75,7 @@ const Game = () => {
             <GameDiv>
                 {blocks.map((num) => (
                     <Block key={num} onClick={() => handleBlockClick(num)}>
-                        {num}
+                        <BlockSpan>{num}</BlockSpan>
                     </Block>
                 ))}
             </GameDiv>
@@ -92,7 +92,8 @@ const Section = styled.div`
     gap: 1rem;
 `;
 
-const NextNumber = styled.h1``;
+const NextNumber = styled.h1`
+margin-top: 2rem`;
 
 const Timer = styled.h2``; // 타이머 스타일 추가
 
@@ -103,6 +104,12 @@ const GameDiv = styled.div`
     grid-template-columns: repeat(3, 1fr);
 `;
 
-const Block = styled.button``;
+const Block = styled.button`
+margin: 0;
+padding: 3rem;
+`;
+
+const BlockSpan = styled.p`
+font-size: 2rem`
 
 export default Game;

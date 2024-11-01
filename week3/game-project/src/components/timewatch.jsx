@@ -1,5 +1,6 @@
 // Timer.jsx
 import { useState, useEffect } from "react";
+import styled from "@emotion/styled";
 
 const Timer = ({ isGameStarted, isGameEnded }) => {
     const [time, setTime] = useState(0);
@@ -15,10 +16,14 @@ const Timer = ({ isGameStarted, isGameEnded }) => {
     }, [isGameStarted, isGameEnded]);
 
     return (
-        <div>
+        <TimeWatch>
             시간: {time.toFixed(2)}초
-        </div>
+        </TimeWatch>
     );
 };
+
+const TimeWatch = styled.div`
+margin-right: 1rem;
+`
 
 export default Timer;
