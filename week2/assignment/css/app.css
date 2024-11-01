@@ -11,6 +11,21 @@ body {
     background-color: #f5f5f5;
     border-bottom: 2px solid #ddd;
 }
+
+.header * {
+    margin: 0;
+    flex: 0;
+}
+
+.text-center {
+    flex: 1;
+    text-align: center;
+    margin: 0 1rem;
+}
+
+.header p {
+    white-space: nowrap;
+}
 /* header css 끝 */
 
 .filter, .data {
