@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 관리 페이지</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/1f1bdf31e2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav>
+    <header class="header">
+            <div><i class="fa-solid fa-bars fa-xl"></i></i></div>
+            <h1 class="text-center">회원 관리 페이지</h1>
+            <p>AND SOPT 웹 파트</p>
+    </header>
+    </nav>
+    
+    <main>
+        <!-- 첫 번째 section  -->
+        <section>
+            <div class="filter">
+                <form class="grid-container">
+                    <label><span>이름</span>
+                        <input type="text" id="name"></label>
+                    <label><span>영문이름</span>
+                        <input type="text" id="englishName"></label>
+                    <label><span>Github</span>
+                        <input type="text" id="github"></label>
+                    <label><span>성별</span>
+                        <select id="gender">
+                            <option value="all-gender">모두</option>
+                            <option value="male">남성</option>
+                            <option value="female">여성</option>
+                        </select></label>
+                    <label><span>역할</span>
+                        <input type="text" id="role"></label>
+                    <label><span>1주차 금잔디조</span>
+                        <input type="text" id="firstWeekGroup"></label>
+                    <label><span>2주차 금잔디조</span>
+                        <input type="text" id="secondWeekGroup"></label>
+                    <button type="button" class="reset-button">초기화</button>
+                    <button type="button" class="filter-button">검색</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 두 번째 section -->
+        <section>
+            <div class="data">
+                <form action="" class="data-form">
+                    <div class="button-container">
+                        <button type="button" class="delete-button delete" onclick="deleteAll();">선택삭제</button>
+                        <button type="button" class="add-button">추가</button>
+                    </div>
+                    <table id="memberTable">
+                        <thead>
+                            <tr>
+                                <th><input id="select-all" type="checkbox" class="represent"></th>
+                                <th class="represent name">이름</th>
+                                <th class="represent englishName">영문이름</th>
+                                <th class="represent github">Github</th>
+                                <th class="represent gender">성별</th>
+                                <th class="represent role">역할</th>
+                                <th class="represent firstWeekGroup">1주차 금잔디</th>
+                                <th class="represent secondWeekGroup">2주차 금잔디</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </section>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">새 멤버 추가</h2>
+                    <button id="closeModalButton" class="close-button">닫기</button>
+                </div>
+                
+                <label ><span class="modal-name">이름</span>
+                    <input type="text" id="newName" required>
+                </label>
+                <label><span class="modal-name">영문 이름</span>
+                    <input type="text" id="newEnglishName" required>
+                </label>
+                <label><span class="modal-name">Github ID</span>
+                    <input type="text" id="newGithub" required>
+                </label>
+                <label><span class="modal-name">성별</span>
+                    <select id="newGender" required>
+                        <option value="male">남성</option>
+                        <option value="female">여성</option>
+                    </select>
+                </label>
+                <label><span class="modal-name">역할</span>
+                    <input type="text" id="newRole" required>
+                </label>
+                <label><span class="modal-name">1주차 금잔디조</span>
+                    <input type="number" id="newFirstWeekGroup" required>
+                </label>
+                <label><span class="modal-name">2주차 금잔디조</span>
+                    <input type="number" id="newSecondWeekGroup" required>
+                </label>
+                <button id="addMemberButton">추가</button>
+            </div>
+        </div>
+    </main>
+    
+    <script src="data.js" type="module"></script>
+    <script src="app.js"></script>
+</body>
+</html>
