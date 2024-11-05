@@ -3,12 +3,21 @@ import Header from './components/header.jsx';
 import Game from './components/game.jsx';
 import Ranking from "./components/ranking.jsx";
 
+
+// everyData 삭제하면 오류 뜨는 것 고치기
+
 function App() {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [timer, setTimer] = useState(0);
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [gameLevel, setGameLevel] = useState(1);
   const [updateRanking, setUpdateRanking] = useState(false);
+
+  const initializeGameData = () => {
+    if (!localStorage.getItem("gameData")) {
+      localStorage.setItem("gameData", JSON.stringify([]));
+    }
+  };
 
   // 게임 시작
   const handleGameStart = () => {
@@ -53,6 +62,3 @@ function App() {
 }
 
 export default App;
-if (!localStorage.getItem("gameData")) {
-  localStorage.setItem("gameData", JSON.stringify(everyData));
-}
