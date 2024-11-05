@@ -9,14 +9,14 @@ function useTimer(isActive) {
             interval = setInterval(() => {
                 setTimer((prevTime) => prevTime + 0.01);
             }, 10);
-        } else if (!isActive && timer !== 0) {
+        } else {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
     }, [isActive]);
 
     const resetTimer = () => setTimer(0);
-
+    
     return [timer, resetTimer];
 }
 

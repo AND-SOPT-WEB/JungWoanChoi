@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 import useTimer from "./timer.jsx"; // 타이머 기능의 커스텀 훅
 
-const Game = ({ isGameStarted, onGameStart, onGameEnd, setTimer }) => {
+const Game = ({ isGameStarted, onGameStart, onGameEnd, setTimer, gameLevel }) => {
     const [blocks, setBlocks] = useState([]);
     const [nextNumber, setNextNumber] = useState(1);
     const [availableNumbers, setAvailableNumbers] = useState([]);
@@ -10,11 +10,13 @@ const Game = ({ isGameStarted, onGameStart, onGameEnd, setTimer }) => {
 
     useEffect(() => {
         initializeGame();
-    }, []); 
+    }, [gameLevel]); 
 
     useEffect(() => {
-        setTimer(timer);
-    }, [timer, setTimer]);
+        if (isGameStarted) {
+            resetTimer(); // 게임이 시작되면 타이머 초기화
+        }
+    }, [isGameStarted, resetTimer]);
 
     const initializeGame = () => {
         const initialNumbers = Array.from({length: 9}, (_, index) => index + 1);
@@ -22,7 +24,7 @@ const Game = ({ isGameStarted, onGameStart, onGameEnd, setTimer }) => {
         setBlocks(shuffledInitialNumbers);
         setNextNumber(1);
         setAvailableNumbers(shuffleArray(Array.from({length: 9}, (_, index) => index + 10)));
-        resetTimer();
+        resetTimer(); // 게임 초기화 시 타이머 리셋
     }
 
     const shuffleArray = (array) => {
@@ -36,6 +38,7 @@ const Game = ({ isGameStarted, onGameStart, onGameEnd, setTimer }) => {
     const handleBlockClick = (num) => {
         if (!isGameStarted && num === 1) {
             onGameStart(); // 게임 시작
+            resetTimer(); // 타이머 초기화
         }
 
         if (num === nextNumber) {
@@ -47,9 +50,8 @@ const Game = ({ isGameStarted, onGameStart, onGameEnd, setTimer }) => {
             setNextNumber(nextNumber + 1);
 
             if (num === 18) { 
-                alert(`게임이 종료되었습니다! 총 시간: ${timer.toFixed(2)} 초`);
                 onGameEnd(); // 게임 종료
-                initializeGame();
+                initializeGame(); // 게임 재초기화
             }
         }
     };
