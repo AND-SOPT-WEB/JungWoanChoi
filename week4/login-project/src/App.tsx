@@ -1,21 +1,26 @@
-import "./App.css";
-import LoginPage from "./components/LoginPage";
-import SignUpPage from "./components/SignUpPage";
-import Mypage from "./components/MyPage";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Mypage from "./pages/Mypage";
+import Login from "./pages/Login";
+import Join from "./pages/Join";
 
 function App() {
-  return (
-    <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/signup-page" element={<SignUpPage />} />
-          <Route path="/mypage" element={<Mypage />} />
-        </Routes>
-      </Router>
-    </>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {},
+    {
+      path: "/join",
+      element: <Join />,
+    },
+    {
+      path: "/hobby",
+      element: <Mypage />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
