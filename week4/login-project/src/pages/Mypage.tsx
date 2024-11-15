@@ -12,6 +12,11 @@ const Mypage = () => {
   const [menu, setMenu] = useState(1);
   const navigate = useNavigate();
 
+  const logout = () => {
+    localStorage.removeItem("tokenData");
+    navigate("/");
+  };
+
   const searchHobby = async () => {
     try {
       const response = await axios.get(
@@ -94,9 +99,7 @@ const Mypage = () => {
         <StyledMenuButton isActive={menu === 2} onClick={() => setMenu(2)}>
           내 정보
         </StyledMenuButton>
-        <StyledMenuButton onClick={() => navigate("/")}>
-          로그아웃
-        </StyledMenuButton>
+        <StyledMenuButton onClick={logout}>로그아웃</StyledMenuButton>
       </Header>
 
       {menu === 1 && (
