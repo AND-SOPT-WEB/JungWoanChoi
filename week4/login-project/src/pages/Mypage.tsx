@@ -53,6 +53,11 @@ const Mypage = () => {
   }, []);
 
   const postUserUpdate = async () => {
+    if (newPassword.length < 1 && newHobby.length < 1) {
+      alert("입력을 하고 버튼을 눌러주세요!");
+      return;
+    }
+    
     try {
       const response = await axios.put(
         "http://211.188.53.75:8080/user",
@@ -82,12 +87,6 @@ const Mypage = () => {
       }
     }
   };
-
-  const isButtonDisabled =
-    newHobby.length < 1 ||
-    newHobby.length > 8 ||
-    newPassword.length < 1 ||
-    newHobby.length > 8;
 
   return (
     <Wrapper>
@@ -144,9 +143,7 @@ const Mypage = () => {
               setNewHobby(e.target.value);
             }}
           />
-          <button onClick={postUserUpdate} disabled={isButtonDisabled}>
-            수정하기
-          </button>
+          <button onClick={postUserUpdate}>수정하기</button>
         </MyInformationContainer>
       )}
     </Wrapper>
