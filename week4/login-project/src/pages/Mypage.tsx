@@ -13,15 +13,21 @@ const Mypage = () => {
   const navigate = useNavigate();
 
   const searchHobby = async () => {
-    const response = await axios.get(
-      `http://211.188.53.75:8080/user/${number}/hobby`,
-      {
-        headers: {
-          token: localStorage.getItem("tokenData"),
-        },
+    try {
+      const response = await axios.get(
+        `http://211.188.53.75:8080/user/${number}/hobby`,
+        {
+          headers: {
+            token: localStorage.getItem("tokenData"),
+          },
+        }
+      );
+      setHobby(response.data.result.hobby);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        alert("알 수 없는 오류가 떴습니다");
       }
-    );
-    setHobby(response.data.result.hobby);
+    }
     // console.log(response);
   };
 
@@ -42,54 +48,62 @@ const Mypage = () => {
   }, []);
 
   const postUserUpdate = async () => {
-    const response = await axios.put(
-      "http://211.188.53.75:8080/user",
-      {
-        password: newPassword,
-        hobby: newHobby,
-      },
-      {
-        headers: {
-          token: localStorage.getItem("tokenData"),
+    try {
+      const response = await axios.put(
+        "http://211.188.53.75:8080/user",
+        {
+          password: newPassword,
+          hobby: newHobby,
         },
+        {
+          headers: {
+            token: localStorage.getItem("tokenData"),
+          },
+        }
+      );
+      console.log(response);
+      setNewHobby("");
+      setNewPassword("");
+      alert("정보가 성공적으로 수정되었어요");
+      searcMyHobby();
+      navigate("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          alert(`에러: ${error.response.status}`);
+        } else {
+          alert("알 수 없는 오류 발생");
+        }
       }
-    );
-    console.log(response);
+    }
   };
+
+  const isButtonDisabled =
+    newHobby.length < 1 ||
+    newHobby.length > 8 ||
+    newPassword.length < 1 ||
+    newHobby.length > 8;
 
   return (
     <Wrapper>
       <Header>
-        <h1>마이페이지</h1>
-        <p
-          onClick={() => {
-            setMenu(1);
-          }}
-        >
+        <StyledMenuButton isActive={menu === 0}>마이페이지</StyledMenuButton>
+        <StyledMenuButton isActive={menu === 1} onClick={() => setMenu(1)}>
           취미
-        </p>
-        <p
-          onClick={() => {
-            setMenu(2);
-            // setMenu((prev) => prev + 1);
-          }}
-        >
+        </StyledMenuButton>
+        <StyledMenuButton isActive={menu === 2} onClick={() => setMenu(2)}>
           내 정보
-        </p>
-        <p
-          onClick={() => {
-            navigate("/");
-          }}
-        >
+        </StyledMenuButton>
+        <StyledMenuButton onClick={() => navigate("/")}>
           로그아웃
-        </p>
+        </StyledMenuButton>
       </Header>
 
       {menu === 1 && (
         <UserInfoContainer>
           <div>
             <h3>내 취미</h3>
-            <p>{`${myHobby}`}</p>
+            <p>{`-> ${myHobby}`}</p>
           </div>
           <input
             type="text"
@@ -101,7 +115,7 @@ const Mypage = () => {
           <button onClick={searchHobby}>찾기</button>
           <div>
             <h3>사용자 취미</h3>
-            <p>{`취미: ${hobby}`}</p>
+            <p>{`-> ${hobby}`}</p>
           </div>
         </UserInfoContainer>
       )}
@@ -127,7 +141,9 @@ const Mypage = () => {
               setNewHobby(e.target.value);
             }}
           />
-          <button onClick={postUserUpdate}>수정하기</button>
+          <button onClick={postUserUpdate} disabled={isButtonDisabled}>
+            수정하기
+          </button>
         </MyInformationContainer>
       )}
     </Wrapper>
@@ -137,8 +153,29 @@ const Mypage = () => {
 export default Mypage;
 
 const Header = styled.header`
+  width: 40rem;
   display: flex;
   gap: 1rem;
+  margin: 20rem auto 0;
+  background-color: ${({ theme }) => theme.color.midgray2};
+  font-size: 1.5rem;
+`;
+
+const StyledMenuButton = styled.p<{ isActive?: boolean }>`
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: ${({ isActive, theme }) =>
+    isActive ? theme.color.primary01 : "transparent"};
+  font-weight: ${({ isActive }) => (isActive ? "bold" : "normal")};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.lightgray2};
+  }
+
+  &:last-child {
+    margin-left: auto;
+  }
 `;
 
 const UserInfoContainer = styled.div`
@@ -148,14 +185,19 @@ const UserInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin: 0 auto;
+  font-size: 1.5rem;
 `;
 
 const MyInformationContainer = styled.div`
+  font-size: 1.5rem;
   width: 40rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin: 0 auto;
+  background-color: ${({ theme }) => theme.color.lightgray1};
 `;
 
 const Wrapper = styled.div``;

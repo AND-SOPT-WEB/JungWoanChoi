@@ -1,6 +1,8 @@
 // tsrafce 단축어 사용하기
 import React from "react";
 import { FormContainer } from "../pages/Join"; // 이렇게 사용하지는 않음 주로 ..
+import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
 
 type JoinUsernameProps = {
   step: number;
@@ -15,6 +17,19 @@ const JoinUsername = ({
   setUsername,
   setStep,
 }: JoinUsernameProps) => {
+  const handleClick = (
+    setStep: React.Dispatch<React.SetStateAction<number>>
+  ) => {
+    if (username != "") {
+      setStep((prev) => prev + 1);
+    } else {
+      alert("입력해주세요");
+    }
+  };
+
+  const isButtonDisabled = username.length < 1 || username.length > 8;
+  const navigate = useNavigate();
+
   return (
     <FormContainer>
       <h3>{`현재 step: ${step}`}</h3>
@@ -34,15 +49,34 @@ const JoinUsername = ({
         // onClick={() => {
         //   alert(username);
         // }}
-        onClick={() => {
-          setStep((prev) => prev + 1);
-          // prev 앞이랑 뒤는 이름 똑같아야 함 !
-        }}
+        onClick={() => handleClick(setStep)}
+        disabled={isButtonDisabled}
       >
         다음
       </button>
+      <p>
+        이미 회원이신가요?{" "}
+        <LoginLink
+          onClick={() => {
+            {
+              navigate("/");
+            }
+          }}
+        >
+          로그인
+        </LoginLink>
+      </p>
     </FormContainer>
   );
 };
+
+const LoginLink = styled.span`
+  color: ${({ theme }) => theme.color.primary03};
+  cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.primary04};
+  }
+`;
 
 export default JoinUsername;

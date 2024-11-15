@@ -9,15 +9,26 @@ const Login = () => {
   const navigate = useNavigate();
 
   const postLogin = async () => {
-    const response = await axios.post("http://211.188.53.75:8080/login", {
-      username: username,
-      password: password,
-    });
-    if (response.status === 200) {
-      localStorage.setItem("tokenData", response.data.result.token);
-      navigate("/hobby");
+    try {
+      const response = await axios.post("http://211.188.53.75:8080/login", {
+        username: username,
+        password: password,
+      });
+      if (response.status === 200) {
+        localStorage.setItem("tokenData", response.data.result.token);
+        alert("로그인 성공");
+        navigate("/hobby");
+      }
+      // console.log(response.data.result.token);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          alert("로그인이 실패되었습니다. 다시 확인해주세요");
+        } else {
+          alert("알 수 없는 오류가 발생했습니다.");
+        }
+      }
     }
-    // console.log(response.data.result.token);
   };
 
   return (
@@ -40,15 +51,15 @@ const Login = () => {
             setPassword(e.target.value);
           }}
         />
-        <button onClick={postLogin}>로그인</button>
+        <StyledButton onClick={postLogin}>로그인</StyledButton>
         {/* 함수 이름을 직접 전달하는 방식 -> postLogin() 이렇게 쓰면 렌더링 시점에서 바로 호출됨 */}
-        <button
+        <StyledButton
           onClick={() => {
             navigate("/join");
           }}
         >
           회원가입
-        </button>
+        </StyledButton>
       </FormContainer>
     </LoginSection>
   );
@@ -60,6 +71,7 @@ const LoginSection = styled.section`
   width: 40rem;
   padding: 2rem;
   background-color: ${({ theme }) => theme.color.lightgray1};
+  margin: 20rem auto;
 `;
 
 const LoginTitle = styled.h1`
@@ -72,4 +84,20 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`;
+
+const StyledButton = styled.button`
+  padding: 1rem;
+  background-color: ${({ theme }) => theme.color.primary04};
+  color: ${({ theme }) => theme.color.white};
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.primary03};
+  }
 `;

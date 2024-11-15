@@ -2,6 +2,7 @@
 import React from "react";
 import { FormContainer } from "../pages/Join";
 import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
 
 type JoinHobbyProps = {
   step: number;
@@ -22,6 +23,7 @@ const JoinHobby = ({
   postUser,
 }: JoinHobbyProps) => {
   const navigate = useNavigate();
+  const isButtonDisabled = hobby.length < 1 || hobby.length > 8;
   return (
     <FormContainer>
       <h3>{`현재 step: ${step}`}</h3>
@@ -41,10 +43,21 @@ const JoinHobby = ({
           postUser();
           navigate("/");
         }}
+        disabled={isButtonDisabled}
       >
         회원가입
       </button>
       {/* //여기를 눌렀을 때만 network에 변화가 있는 것! */}
+      <p>
+        이미 회원이신가요?{" "}
+        <LoginLink
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          로그인
+        </LoginLink>
+      </p>
     </FormContainer>
   );
 };
@@ -53,3 +66,11 @@ const JoinHobby = ({
 // setHobby는 여기서 사용해도 됨
 
 export default JoinHobby;
+
+const LoginLink = styled.span`
+  cursor: pointer;
+  color: ${({ theme }) => theme.color.primary03};
+  &:hover {
+    color: ${({ theme }) => theme.color.primary04};
+  }
+`;
